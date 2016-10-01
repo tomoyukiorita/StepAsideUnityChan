@@ -4,45 +4,51 @@ using System.Collections;
 public class destroy : MonoBehaviour {
 
 
-		public Camera _setCamera;
+		
 
-		//Margin
-		float margin = 0.1f; 
-		float negativeMargin;
-		float positiveMargin;
+	public Camera _setCamera;
 
-		void Start ()
-		{
-			if (_setCamera == null) {
-				_setCamera = Camera.main;
-			}
+	//Margin
+	float margin = 0.01f;  
+	float negativeMargin;
+	float positiveMargin;
 
-			negativeMargin = 0 - margin;
-			positiveMargin = 1 + margin;
+	void Start ()
+	{
+		if (_setCamera == null) {
+			_setCamera = Camera.main;
 		}
 
-		// Update is called once per frame
-		void Update () 
-		{
-			if (this.isOutOfScreen()) {
-				Destroy (gameObject);
-			}
-		}
+		negativeMargin = 0 - margin;
+		positiveMargin = 1 + margin;
+	}
 
-		bool isOutOfScreen() 
-		{
-			Vector3 positionInScreen = _setCamera.WorldToViewportPoint(transform.position);
-			positionInScreen.z = transform.position.z;
-
-			if (positionInScreen.x <= negativeMargin ||
-				positionInScreen.x >= positiveMargin ||
-				positionInScreen.y <= negativeMargin ||
-				positionInScreen.y >= positiveMargin)
-			{
-				return true;
-			} else {
-				return false;
-			}
+	// Update is called once per frame
+	void Update () 
+	{
+		if (this.isOutOfScreen()) {
+			Destroy (gameObject);
 		}
 	}
+
+	bool isOutOfScreen() 
+	{
+		Vector3 positionInScreen = _setCamera.WorldToViewportPoint(transform.position);
+		positionInScreen.z = transform.position.z;
+
+		if (positionInScreen.x <= negativeMargin ||
+			positionInScreen.x >= positiveMargin ||
+			positionInScreen.y <= negativeMargin
+			)
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+	 
+
+
+	
 
